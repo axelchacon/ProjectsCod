@@ -18,6 +18,17 @@ function App() {
     ]);
     setNewItem("");
 }
+function toggleTodo(id,checked){
+
+  setTodos((currentTodos)=> {
+    return currentTodos.map((todo)=>{
+      if(todo.id == id) {
+        return {...todo, completed:checked}
+      }
+      return todo; 
+    })
+  })
+}
 //console.log(todos); esto se muestra en cosola y aún no renderiza la lista. Para renderiar, es paso 1.
 console.log(todos)
   return (
@@ -40,7 +51,7 @@ console.log(todos)
         return (
           <li key ={todo.id}>
             <label>
-               <input type = "checkbox"/>
+               <input type = "checkbox" onChange={(e)=>toggleTodo(todo.id, e.target.checked)}/>
                {todo.title}
             </label>
             <button className="btn btn-danger">DELETE</button> 
